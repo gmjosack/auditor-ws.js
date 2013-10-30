@@ -1,0 +1,21 @@
+{
+    "author": "Gary M. Josack",
+    "name": "auditor-ws",
+    "description": "WebSocket Server for Auditor",
+    "version": "0.1.2",
+    "repository": {
+        "url": "https://github.com/gmjosack/auditor-ws"
+    },
+    "bin": {
+        "auditor-ws": "./bin/auditor-ws.js"
+    },
+    "dependencies": {
+        "optimist": "~0.6.0"
+    },
+    "devDependencies": {},
+    "optionalDependencies": {},
+    "engines": {
+      "node": "*"
+    },
+    "license": "MIT"
+}
