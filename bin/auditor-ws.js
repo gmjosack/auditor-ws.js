@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var http = require("http");
 var io = require("socket.io");
 var fs = require("fs");
 var amqp = require("amqp");
@@ -57,6 +58,7 @@ function main(){
     var optimist = require("optimist")
         .usage("WebSocket Server for Auditor")
         .default({
+            "host": "0.0.0.0",
             "port": 8001,
             "rabbitmq_host": "localhost",
             "rabbitmq_port": "5672",
@@ -74,7 +76,11 @@ function main(){
         process.exit(0);
     }
 
-    var iosocket = io.listen(argv.port);
+    console.log("Starting server...")
+    var server = http.createServer()
+    console.log("Binding on", argv.host + ":" + argv.port + ".")
+    server.listen(argv.port, argv.host)
+    var iosocket = io.listen(server);
     iosocket.set("log level", 1)
 
     var rabbit_options = {
@@ -84,6 +90,9 @@ function main(){
     }
     extend(rabbit_options, get_rabbit_creds(argv.rabbitmq_credentials_file));
 
+    console.log("Connecting to RabbitMQ on",
+                argv.rabbitmq_host + ":" +  argv.rabbitmq_port,
+                "(" + argv.rabbitmq_vhost + ").")
     var connection = amqp.createConnection(rabbit_options);
 
     connection.on("ready", function(){
