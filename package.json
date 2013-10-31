@@ -2,7 +2,7 @@
     "author": "Gary M. Josack",
     "name": "auditor-ws",
     "description": "WebSocket Server for Auditor",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "repository": {
         "url": "https://github.com/gmjosack/auditor-ws"
     },
@@ -10,6 +10,8 @@
         "auditor-ws": "./bin/auditor-ws.js"
     },
     "dependencies": {
+        "socket.io": "~0.9.16",
+        "rabbit.js": "~0.2.2",
         "optimist": "~0.6.0"
     },
     "devDependencies": {},
